@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" data-route="/calendar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <script src="./static-csr.js" data-static></script>
+</head>
+
+<body>
+    <div>
+        <a href="./add">Add</a>
+        <a href="./list">List</a>
+        <a href="./calendar">Calendar</a>
+    </div>
+    <table>
+        <tr>
+            <th>日</th>
+            <th>一</th>
+            <th>二</th>
+            <th>三</th>
+            <th>四</th>
+            <th>五</th>
+            <th>六</th>
+        </tr>
+    </table>
+
+    <template id="week">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+
+    <script>
+        const tableElement = document.querySelector('table');
+        const weekTemplate = document.getElementById('week');
+        const date = new Date();
+        const thisMonth = date.getMonth();
+
+        for (date.setDate(1); date.getMonth() === thisMonth; date.setDate(date.getDate() + 1)) {
+            console.log(date.getDay());
+        }
+    </script>
+</body>
+
+</html>

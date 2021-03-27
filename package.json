@@ -1,0 +1,28 @@
+{
+    "name": "nodejs-mysql-crud",
+    "version": "1.0.0",
+    "dependencies": {
+        "@types/mysql": "^2.15.18",
+        "body-parser": "^1.19.0",
+        "cookie-parser": "^1.4.3",
+        "ejs": "^2.5.6",
+        "express": "^4.17.1",
+        "express-flash": "0.0.2",
+        "express-myconnection": "^1.0.4",
+        "express-session": "^1.17.0",
+        "express-validator": "^6.10.0",
+        "method-override": "^2.3.10",
+        "morgan": "^1.9.1",
+        "mysql": "^2.18.1",
+        "nodemon": "^2.0.7",
+        "promisfy": "^1.2.0",
+        "sql-template-strings": "^2.2.2"
+    },
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon .",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC"
+}

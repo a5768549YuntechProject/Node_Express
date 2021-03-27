@@ -1,0 +1,15 @@
+{
+    "databases": {
+        "default": {
+            "hostname": "localhost",
+            "username": "root",
+            "password": "Aa970236",
+            "port": 3306,
+            "database": "calendar"
+        }
+    },
+    "server": {
+        "publicDir": "/public",
+        "port": 3000
+    }
+}

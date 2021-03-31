@@ -21,39 +21,11 @@
     padding: 0;
     border: 1px solid #888;
     width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
-}
-
-/* Add Animation */
-@-webkit-keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0;
-    }
-    to {
-        top: 0;
-        opacity: 1;
-    }
-}
-
-@keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0;
-    }
-    to {
-        top: 0;
-        opacity: 1;
-    }
 }
 
 .modal-header {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    background-color: #000;
     color: white;
 }
 
@@ -62,15 +34,15 @@
 }
 
 .current_date {
-    background: #ca3;
+    background: rgb(61, 103, 219);
     color: white;
 }
 #tabapay_calendar {
-    border: 1px solid #262;
+    border: 1px solid #000;
 }
 thead {
-    background: #ca3;
-    color: #262;
+    background: rgb(61, 103, 219);
+    color: #FFF;
 }
 td {
     padding: 2%;
@@ -80,7 +52,7 @@ th {
     text-align: center;
 }
 td:hover {
-    background: #262;
+    background: rgba(153, 153, 153, 0.644);
     color: white;
 }
 #previous {
@@ -95,14 +67,15 @@ td:hover {
 #calendar_header {
     text-align: center;
     width: 70%;
-    color: white;
+    color: #000;
     float: left;
     margin: 1% 0px;
 }
 .placeholder {
-    width: -webkit-fill-available;
     height: 35px;
-    background: #262;
+    background: #FFF;
+    color: #000;
 }
-.card {
+span{
+    color:#000;
 }

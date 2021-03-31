@@ -1,3 +1,4 @@
+<!-- TODO:這頁的route reload會導致header部分壞掉 -->
 <!DOCTYPE html>
 <html lang="en" data-route="/calendar">
 
@@ -7,8 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
     <script src="./js/static-csr.js" data-static></script>
-    
+
     <script src="./js/index.js" data-static></script>
+    <link rel="stylesheet" href="./css/index.css" data-static>
     <link rel="stylesheet" href="./css/calendar.css">
 </head>
 
@@ -22,10 +24,9 @@
     <div class="card">
         <div class="placeholder">
             <h4 id="previous" onclick="previous()">
-                &#060;
+                <span>&#060;</span>
                 <h3 id="calendar_header"></h3>
-                <h4 id="next" onclick="next()">
-                &#062;</h4>
+                <h4 id="next" onclick="next()"><span>&#062;</span></h4>
         </div>
         <table id="tabapay_calendar" cellspacing="0" cellpadding="10" style="width:100%">
             <thead id="calendar_head">

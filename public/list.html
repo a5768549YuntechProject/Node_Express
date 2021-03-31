@@ -6,15 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List</title>
-    <script src="./static-csr.js" data-static></script>
+    <script src="./js/static-csr.js" data-static></script>
+    <script src="./js/index.js" data-static></script>
+    <link rel="stylesheet" href="./css/list.css">
 </head>
 
 <body>
     <div>
-        <a href="./add">Add</a>
-        <a href="./list">List</a>
+        <a href="./">Home</a>
+        <a href="./add">Add New Event</a>
+        <a href="./list">List All Events</a>
         <a href="./calendar">Calendar</a>
     </div>
+
+    <h1>Event List</h1>
+    <table id="eventTable">
+        <tr>
+            <th>Start</th>
+            <th>End</th>
+            <th>Event</th>
+            <th>Action</th>
+        </tr>
+    </table>
+    <script type="module" src="./js/list.js"></script>
 </body>
 
 </html>

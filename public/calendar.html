@@ -6,49 +6,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
-    <script src="./static-csr.js" data-static></script>
+    <script src="./js/static-csr.js" data-static></script>
+    
+    <script src="./js/index.js" data-static></script>
+    <link rel="stylesheet" href="./css/calendar.css">
 </head>
 
 <body>
     <div>
-        <a href="./add">Add</a>
-        <a href="./list">List</a>
+        <a href="./">Home</a>
+        <a href="./add">Add New Event</a>
+        <a href="./list">List All Events</a>
         <a href="./calendar">Calendar</a>
     </div>
-    <table>
-        <tr>
-            <th>日</th>
-            <th>一</th>
-            <th>二</th>
-            <th>三</th>
-            <th>四</th>
-            <th>五</th>
-            <th>六</th>
-        </tr>
-    </table>
-
-    <template id="week">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </template>
-
-    <script>
-        const tableElement = document.querySelector('table');
-        const weekTemplate = document.getElementById('week');
-        const date = new Date();
-        const thisMonth = date.getMonth();
-
-        for (date.setDate(1); date.getMonth() === thisMonth; date.setDate(date.getDate() + 1)) {
-            console.log(date.getDay());
-        }
-    </script>
+    <div class="card">
+        <div class="placeholder">
+            <h4 id="previous" onclick="previous()">
+                &#060;
+                <h3 id="calendar_header"></h3>
+                <h4 id="next" onclick="next()">
+                &#062;</h4>
+        </div>
+        <table id="tabapay_calendar" cellspacing="0" cellpadding="10" style="width:100%">
+            <thead id="calendar_head">
+                <tr>
+                    <th>S</th>
+                    <th>M</th>
+                    <th>T</th>
+                    <th>W</th>
+                    <th>T</th>
+                    <th>F</th>
+                    <th>S</th>
+                </tr>
+            </thead>
+            <tbody id="calendar_body">
+            </tbody>
+        </table>
+        <div id="calendar_modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+        <script src="./js/calendar.js"></script>
 </body>
 
 </html>

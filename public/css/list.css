@@ -1,0 +1,13 @@
+table{
+    width: 100%;
+}
+tr,td{
+    padding: 10px;
+    padding-left: 0px;
+}
+th{
+    background-color: #999;
+}
+td > a{
+    padding-right: 10px;
+}

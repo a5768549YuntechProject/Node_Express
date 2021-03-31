@@ -1,6 +1,10 @@
 const addSchedule = require('./addSchedule');
 const updateSchedule = require('./updateSchedule');
 const removeSchedule = require('./removeSchedule');
+const listSchedule = require('./listSchedule');
+const pickSchedule = require('./pickSchedule');
 module.exports.addSchedule = addSchedule;
 module.exports.updateSchedule = updateSchedule;
 module.exports.removeSchedule = removeSchedule;
+module.exports.listSchedule = listSchedule;
+module.exports.pickSchedule = pickSchedule;

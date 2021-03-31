@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" data-route="/add">
+<html lang="en" data-route="/edit">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add</title>
+    <title>Edit Event</title>
     <script src="./js/static-csr.js" data-static></script>
     <script src="./js/index.js" data-static></script>
-    <link href="./css/add.css" rel="stylesheet">
 </head>
 
 <body>
@@ -18,7 +17,9 @@
         <a href="./list">List All Events</a>
         <a href="./calendar">Calendar</a>
     </div>
-    <h1>Add New Event</h1>
+
+    <h1>Edit Event</h1>
+
     <table>
         <tr>
             <td><span>Start date</span></td>
@@ -30,14 +31,14 @@
         </tr>
         <tr>
             <td><span>Event</span></td>
-            <td><input type="text" id="event"></td>
+            <td><input type="text" id="event" required></td>
         </tr>
         <tr>
             <td><span></span></td>
             <td><button id="submit">Add</button></td>
         </tr>
     </table>
-    <script src="./js/add.js"></script>
+    <script src="./js/edit.js"></script>
 </body>
 
 </html>

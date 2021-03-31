@@ -36,6 +36,7 @@ function next() {
     currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
     currentMonth = currentMonth === 11 ? 0 : currentMonth + 1;
 
+    console.log([currentMonth, currentYear]);
     showCalendar(currentMonth, currentYear);
 }
 
@@ -198,7 +199,9 @@ function showCalendar(month, year) {
                     "calendar_body"
                 ));
                 table_body.innerHTML = "";
-                header.innerHTML = months[month] + " " + year;
+                console.log('before:' + header.innerHTML);
+                document.getElementById("calendar_header").innerHTML = months[month] + " " + year;
+                console.log('alfter:' + header.innerHTML);
                 let date = 1;
                 for (let i = 0; i < 6; i++) {
                     let row = table_body.insertRow(i);
@@ -241,7 +244,9 @@ function showCalendar(month, year) {
             "calendar_body"
         ));
         table_body.innerHTML = "";
-        header.innerHTML = months[month] + " " + year;
+        console.log('before:' + header.innerHTML);
+        document.getElementById("calendar_header").innerHTML = months[month] + " " + year;
+        console.log('alfter:' + header.innerHTML);
         let date = 1;
         for (let i = 0; i < 6; i++) {
             let row = table_body.insertRow(i);

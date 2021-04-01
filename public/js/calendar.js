@@ -1,6 +1,7 @@
 let today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
+/** 月份字串 */
 let months = [
     "January",
     "February",
@@ -22,6 +23,9 @@ let modal = document.getElementById("calendar_modal");
 let span = document.getElementsByClassName("close")[0];
 let modal_body = document.getElementsByClassName("modal-body")[0];
 
+/**
+ * render上個月份的資料
+ */
 function previous() {
     document.getElementById("previous").style.color = "#ca3";
     currentYear = currentMonth === 0 ? currentYear - 1 : currentYear;
@@ -31,6 +35,9 @@ function previous() {
     showCalendar(currentMonth, currentYear);
 }
 
+/**
+ * render下個月份的資料
+ */
 function next() {
     document.getElementById("next").style.color = "#ca3";
     currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
@@ -46,6 +53,13 @@ window.onclick = (event) => {
     }
 };
 
+/**
+ * 檢查傳入日期是否為今日
+ * @param {number} year 年
+ * @param {number} month 月
+ * @param {number} date 日
+ * @returns 傳入日期是否為今日
+ */
 function valiNowDate(year, month, date) {
     return (
         date === today.getDate() &&
@@ -54,13 +68,24 @@ function valiNowDate(year, month, date) {
     );
 }
 
+/**
+ * 計算兩個日期相差的天數
+ * @param {string} start 開始日期
+ * @param {string} end 結束日期
+ * @returns 兩個日期相差的天數
+ */
 function countDate(start, end) {
     var d1 = new Date(start);
     var d2 = new Date(end);
     return (d2.getTime() - d1.getTime()) / (1000 * 3600 * 24);
 }
 
-//2021-03-30T16:00:00.000Z
+
+/**
+ * 將日期字串轉為日期數字陣列
+ * @param {string} data YYYY-MM-DDThh:mm:ss.000Z
+ * @returns {number[]} 日期數字陣列[年,月,日]
+ */
 function formatDate(data) {
     let _date = data.split("T")[0];
     let year = parseInt(_date.split("-")[0]);
@@ -69,18 +94,27 @@ function formatDate(data) {
     return [year, month, date];
 }
 
-//2021-03-30T16:00:00.000Z
+/**
+ * 將日期數字陣列轉為日期字串
+ * @param {number[]} data
+ * @returns YYYY-MM-DDThh:mm:ss.000Z
+ */
 function formatStringDate(data) {
-    data = data.map(String);
-    if (data[1].length === 1) {
-        data[1] = "0" + data[1];
+    let _data = data.map(String);
+    if (_data[1].length === 1) {
+        _data[1] = "0" + _data[1];
     }
-    if (data[2].length === 1) {
-        data[2] = "0" + data[2];
+    if (_data[2].length === 1) {
+        _data[2] = "0" + _data[2];
     }
-    return data[0] + "-" + data[1] + "-" + data[2] + "T00:00:00.000Z";
+    return _data[0] + "-" + _data[1] + "-" + _data[2] + "T00:00:00.000Z";
 }
 
+/**
+ * 
+ * @param {*} data 
+ * @returns 
+ */
 function plusDate(data) {
     let _year = data[0];
     let _month = data[1];
@@ -199,9 +233,10 @@ function showCalendar(month, year) {
                     "calendar_body"
                 ));
                 table_body.innerHTML = "";
-                console.log('before:' + header.innerHTML);
-                document.getElementById("calendar_header").innerHTML = months[month] + " " + year;
-                console.log('alfter:' + header.innerHTML);
+                console.log("before:" + header.innerHTML);
+                document.getElementById("calendar_header").innerHTML =
+                    months[month] + " " + year;
+                console.log("alfter:" + header.innerHTML);
                 let date = 1;
                 for (let i = 0; i < 6; i++) {
                     let row = table_body.insertRow(i);
@@ -244,9 +279,10 @@ function showCalendar(month, year) {
             "calendar_body"
         ));
         table_body.innerHTML = "";
-        console.log('before:' + header.innerHTML);
-        document.getElementById("calendar_header").innerHTML = months[month] + " " + year;
-        console.log('alfter:' + header.innerHTML);
+        console.log("before:" + header.innerHTML);
+        document.getElementById("calendar_header").innerHTML =
+            months[month] + " " + year;
+        console.log("alfter:" + header.innerHTML);
         let date = 1;
         for (let i = 0; i < 6; i++) {
             let row = table_body.insertRow(i);

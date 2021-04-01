@@ -1,3 +1,8 @@
+/**
+ * 檢查日期
+ * @param {String} str 輸入日期
+ * @returns 日期格式是否正確
+ */
 function checkDateTime(str) {
     if (str === "") {
         alert("請輸入日期");
@@ -36,6 +41,12 @@ function checkDateTime(str) {
     }
 }
 
+/**
+ * 檢查時間順序是否正確
+ * @param {String} startTime 開始日期
+ * @param {String} endTime 結束日期
+ * @returns 時間順序是否正確
+ */
 function parseDate(startTime, endTime) {
     if (Date.parse(startTime).valueOf() > Date.parse(endTime).valueOf()) {
         alert("開始時間不能晚於結束時間");
@@ -45,6 +56,11 @@ function parseDate(startTime, endTime) {
     }
 }
 
+/**
+ * 檢查事件是否填入
+ * @param {String} str 事件
+ * @returns 事件是否填入
+ */
 function checkEmtpy(str) {
     if (str === "" || str === null) {
         alert("請填入事件");
@@ -54,7 +70,12 @@ function checkEmtpy(str) {
     }
 }
 
-function timeFormat(str) {
+/**
+ * 將SQL DateTime格式轉為顯示格式
+ * @param {String} str YYYY-MM-DDThh:mm:ss.000Z
+ * @returns YYYY-MM-DD hh:mm:ss
+ */
+function formatSQLDateTime(str) {
     let value1 = str.split("T");
     let value2 = value1[1].split(".");
     return value1[0] + " " + value2[0];
@@ -67,13 +88,13 @@ try {
         })
         .then((result) => {
             let data = result[0];
-            timeFormat(data["start_date"]);
+            formatSQLDateTime(data["start_date"]);
             /** @type any */ (document.getElementById(
                 "startTime"
-            )).value = timeFormat(data["start_date"]);
+            )).value = formatSQLDateTime(data["start_date"]);
             /** @type any */ (document.getElementById(
                 "endTime"
-            )).value = timeFormat(data["end_date"]);
+            )).value = formatSQLDateTime(data["end_date"]);
             /** @type any */ (document.getElementById("event")).value =
                 data["event"];
             console.log(data);

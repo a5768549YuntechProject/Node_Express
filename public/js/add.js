@@ -1,3 +1,8 @@
+/**
+ * 檢查日期
+ * @param {String} str 輸入日期
+ * @returns 日期格式是否正確
+ */
 function checkDateTime(str) {
     if (str === "") {
         alert("請輸入日期");
@@ -36,6 +41,12 @@ function checkDateTime(str) {
     }
 }
 
+/**
+ * 檢查時間順序是否正確
+ * @param {String} startTime 開始日期
+ * @param {String} endTime 結束日期
+ * @returns 時間順序是否正確
+ */
 function parseDate(startTime, endTime) {
     if (Date.parse(startTime).valueOf() > Date.parse(endTime).valueOf()) {
         alert("開始時間不能晚於結束時間");
@@ -45,6 +56,11 @@ function parseDate(startTime, endTime) {
     }
 }
 
+/**
+ * 檢查事件是否填入
+ * @param {String} str 事件
+ * @returns 事件是否填入
+ */
 function checkEmtpy(str) {
     if (str === "" || str === null) {
         alert("請填入事件");
@@ -89,6 +105,7 @@ submitButton.onclick = function () {
                 .then((result) => {
                     alert(result.message);
                 });
+            // @ts-ignore
             route = "/list";
         } catch (error) {
             console.log(error);

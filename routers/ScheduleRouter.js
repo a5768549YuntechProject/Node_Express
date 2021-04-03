@@ -7,12 +7,13 @@ const {
     pickSchedule,
 } = require("../services/schedules");
 const validateScheduleAdd = require("../validators/schedules/validateScheduleAdd");
+const validateScheduleUpdate = require("../validators/schedules/validateScheduleUpdate");
 /** 排程路由 */
 const ScheduleRouter = Router();
 
 ScheduleRouter.get("/", listSchedule);
 ScheduleRouter.post("/", validateScheduleAdd, addSchedule);
-ScheduleRouter.put("/:id", updateSchedule);
+ScheduleRouter.put("/:id", validateScheduleUpdate, updateSchedule);
 ScheduleRouter.delete("/", removeSchedule);
 
 ScheduleRouter.get("/:id", pickSchedule);

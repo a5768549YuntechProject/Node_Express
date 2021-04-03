@@ -31,6 +31,7 @@ function previous() {
     currentYear = currentMonth === 0 ? currentYear - 1 : currentYear;
     currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
 
+    document.getElementById("calendar_header").innerHTML = months[currentMonth] + " " + currentYear;
     console.log([currentMonth, currentYear]);
     showCalendar(currentMonth, currentYear);
 }
@@ -43,6 +44,7 @@ function next() {
     currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
     currentMonth = currentMonth === 11 ? 0 : currentMonth + 1;
 
+    document.getElementById("calendar_header").innerHTML = months[currentMonth] + " " + currentYear;
     console.log([currentMonth, currentYear]);
     showCalendar(currentMonth, currentYear);
 }
@@ -61,11 +63,7 @@ window.onclick = (event) => {
  * @returns 傳入日期是否為今日
  */
 function valiNowDate(year, month, date) {
-    return (
-        date === today.getDate() &&
-        month === today.getMonth() &&
-        year === today.getFullYear()
-    );
+    return date === today.getDate() && month === today.getMonth() && year === today.getFullYear();
 }
 
 /**
@@ -79,7 +77,6 @@ function countDate(start, end) {
     var d2 = new Date(end);
     return (d2.getTime() - d1.getTime()) / (1000 * 3600 * 24);
 }
-
 
 /**
  * 將日期字串轉為日期數字陣列
@@ -101,28 +98,25 @@ function formatDate(data) {
  */
 function formatStringDate(data) {
     let _data = data.map(String);
-    if (_data[1].length === 1) {
-        _data[1] = "0" + _data[1];
-    }
-    if (_data[2].length === 1) {
-        _data[2] = "0" + _data[2];
-    }
+    if (_data[1].length === 1) _data[1] = "0" + _data[1];
+    if (_data[2].length === 1) _data[2] = "0" + _data[2];
+
     return _data[0] + "-" + _data[1] + "-" + _data[2] + "T00:00:00.000Z";
 }
 
 /**
- * 
- * @param {*} data 
- * @returns 
+ * 將輸入日期加一天
+ * @param {number[]} data 數字陣列[年,月,日]
+ * @returns {number[]} 數字陣列[年,月,日]
  */
 function plusDate(data) {
     let _year = data[0];
     let _month = data[1];
     let _day = data[2];
+    //計算閏年
     let maxDateArray = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    if ((!(_year % 4) && _year % 100) || !(_year % 400)) {
-        maxDateArray[1] = 29;
-    }
+    if ((!(_year % 4) && _year % 100) || !(_year % 400)) maxDateArray[1] = 29;
+
     let maxDay = maxDateArray[_month - 1];
 
     if (_day === maxDay && _month === 12) {
@@ -139,6 +133,11 @@ function plusDate(data) {
     return [_year, _month, _day];
 }
 
+/**
+ * 取得資料庫的資料更改格式為YYYY-MM-DDThh:mm:ss.000Z和更改時區
+ * @param {String} date
+ * @returns YYYY-MM-DDThh:mm:ss.000Z
+ */
 function formatDateToString(date) {
     var d1 = new Date(date);
     d1.setTime(d1.getTime() + 480 * 60 * 1000);
@@ -154,22 +153,13 @@ function formatDateToString(date) {
     if (_min.length === 1) _min = "0" + _min;
     if (_sec.length === 1) _sec = "0" + _sec;
 
-    return (
-        _year +
-        "-" +
-        _month +
-        "-" +
-        _day +
-        "T" +
-        _hour +
-        ":" +
-        _min +
-        ":" +
-        _sec +
-        ".000Z"
-    );
+    return _year + "-" + _month + "-" + _day + "T" + _hour + ":" + _min + ":" + _sec + ".000Z";
 }
 
+/**
+ * 列出時間事件清單並儲存於全域變數內
+ * @param {String[]} data
+ */
 function listEvent(data) {
     data.forEach((element) => {
         element["start_date"] = formatDateToString(element["start_date"]);
@@ -190,9 +180,17 @@ function listEvent(data) {
     });
     console.log(list);
 }
-//2021-03-30T16:00:00.000Z#test
+
+/**
+ * 將資料庫內的event格式化成YYYY-MM-DDThh:mm:ss.000Z#{event}
+ * @param {string | number} year
+ * @param {string | number} month
+ * @param {string | number} date
+ * @param {string} eventString
+ * @returns YYYY-MM-DDThh:mm:ss.000Z#{event}
+ */
 function putEvent(year, month, date, eventString) {
-    month += 1;
+    /** @type {any} */ (month) += 1;
     let event = eventString.split("#")[1];
     let dateString = eventString.split("T")[0];
     let _year = dateString.split("-")[0];
@@ -214,7 +212,60 @@ function putEvent(year, month, date, eventString) {
     }
 }
 
+/**
+ * 畫出當週資料表格
+ * @param {String} date 日期資料
+ * @param {String} event 事件資料
+ */
+function renderWeekTable(date, event) {
+    let eventTable = document.getElementById("weekEventTable");
+    let mainTr = document.createElement("tr");
+    let dateTd = document.createElement("td");
+    let eventTd = document.createElement("td");
+
+    dateTd.innerHTML = date;
+    eventTd.innerHTML = event;
+
+    mainTr.append(dateTd);
+    mainTr.append(eventTd);
+
+    eventTable.append(mainTr);
+}
+
+/**
+ * 畫出當日資料表格
+ * @param {String} date 日期資料
+ * @param {String} event 事件資料
+ */
+function renderTodayTable(date, event) {
+    let eventTable = document.getElementById("todayEventTable");
+    let mainTr = document.createElement("tr");
+    let dateTd = document.createElement("td");
+    let eventTd = document.createElement("td");
+
+    dateTd.innerHTML = date;
+    eventTd.innerHTML = event;
+
+    mainTr.append(dateTd);
+    mainTr.append(eventTd);
+
+    eventTable.append(mainTr);
+}
+
+/**
+ * fetch後端並且render出日曆
+ * @param {number} month
+ * @param {number} year
+ */
 function showCalendar(month, year) {
+    document.getElementById("previous").style.color = "white";
+    document.getElementById("next").style.color = "white";
+
+    let daysInMonth = 32 - new Date(year, month, 32).getDate();
+    let firstDayOfWeek = new Date(year, month).getDay();
+    let table_body = /**@type {any} */ (document.getElementById("calendar_body"));
+    table_body.innerHTML = "";
+
     if (globalThis.data === undefined || globalThis.data === null) {
         fetch(apiUrl + "api/schedules")
             .then((res) => {
@@ -225,21 +276,34 @@ function showCalendar(month, year) {
 
                 listEvent(globalThis.data);
 
-                document.getElementById("previous").style.color = "white";
-                document.getElementById("next").style.color = "white";
-                let daysInMonth = 32 - new Date(year, month, 32).getDate();
-                let firstDayOfWeek = new Date(year, month).getDay();
-                let table_body = /**@type {any} */ (document.getElementById(
-                    "calendar_body"
-                ));
-                table_body.innerHTML = "";
-                console.log("before:" + header.innerHTML);
-                document.getElementById("calendar_header").innerHTML =
-                    months[month] + " " + year;
-                console.log("alfter:" + header.innerHTML);
+                document.getElementById("calendar_header").innerHTML = months[month] + " " + year;
                 let date = 1;
+                let week = [];
+                let weekEvent = [];
                 for (let i = 0; i < 6; i++) {
                     let row = table_body.insertRow(i);
+                    if (week.length !== 0) {
+                        console.log(week);
+                        console.log(weekEvent);
+                        if (week.indexOf(today.getDate()) !== -1) {
+                            thisWeekList = week;
+                            thisWeekListEvent = weekEvent;
+                            todayList = thisWeekList[week.indexOf(today.getDate())];
+                            todayListEvent = thisWeekListEvent[week.indexOf(today.getDate())];
+
+                            for (let i in thisWeekList) {
+                                console.log(i);
+                                renderWeekTable(
+                                    month + 1 + "/" + thisWeekList[i],
+                                    thisWeekListEvent[i]
+                                );
+                            }
+                            renderTodayTable(month + 1 + "/" + todayList, todayListEvent);
+                        }
+
+                        week = [];
+                        weekEvent = [];
+                    }
                     for (let j = 0; j < 7; j++) {
                         let cell = row.insertCell(j);
                         if (i === 0 && j < firstDayOfWeek) {
@@ -254,14 +318,13 @@ function showCalendar(month, year) {
                             let event = "";
 
                             list.forEach((element) => {
-                                if (
-                                    putEvent(year, month, date, element) !== ""
-                                ) {
-                                    event +=
-                                        putEvent(year, month, date, element) +
-                                        "<br/>";
+                                if (putEvent(year, month, date, element) !== "") {
+                                    event += putEvent(year, month, date, element) + "<br/>";
                                 }
                             });
+
+                            week.push(date);
+                            weekEvent.push(event);
                             console.log(event);
                             cell.innerHTML = "" + date + "<br/><br/>" + event;
                             cell.id = date;
@@ -271,18 +334,7 @@ function showCalendar(month, year) {
                 }
             });
     } else {
-        document.getElementById("previous").style.color = "white";
-        document.getElementById("next").style.color = "white";
-        let daysInMonth = 32 - new Date(year, month, 32).getDate();
-        let firstDayOfWeek = new Date(year, month).getDay();
-        let table_body = /**@type {any} */ (document.getElementById(
-            "calendar_body"
-        ));
-        table_body.innerHTML = "";
-        console.log("before:" + header.innerHTML);
-        document.getElementById("calendar_header").innerHTML =
-            months[month] + " " + year;
-        console.log("alfter:" + header.innerHTML);
+        document.getElementById("calendar_header").innerHTML = months[month] + " " + year;
         let date = 1;
         for (let i = 0; i < 6; i++) {
             let row = table_body.insertRow(i);
@@ -301,10 +353,10 @@ function showCalendar(month, year) {
 
                     list.forEach((element) => {
                         if (putEvent(year, month, date, element) !== "") {
-                            event +=
-                                putEvent(year, month, date, element) + "<br/>";
+                            event += putEvent(year, month, date, element) + "<br/>";
                         }
                     });
+
                     console.log(event);
                     cell.innerHTML = "" + date + "<br/><br/>" + event;
                     cell.id = date;
@@ -316,3 +368,10 @@ function showCalendar(month, year) {
 }
 
 showCalendar(currentMonth, currentYear);
+if (todayList !== 0) {
+    for (let i in thisWeekList) {
+        console.log(i);
+        renderWeekTable(currentMonth + 1 + "/" + thisWeekList[i], thisWeekListEvent[i]);
+    }
+    renderTodayTable(currentMonth + 1 + "/" + todayList, todayListEvent);
+}

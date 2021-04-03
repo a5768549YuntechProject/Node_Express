@@ -8,9 +8,7 @@ function checkDateTime(str) {
         alert("請輸入日期");
         return false;
     }
-    var matches = str.match(
-        /^(\d{4})\-(\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/
-    );
+    var matches = str.match(/^(\d{4})\-(\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/);
     if (matches === null) {
         // invalid
         alert("請輸入正確的日期");
@@ -78,7 +76,16 @@ function checkEmtpy(str) {
 function formatSQLDateTime(str) {
     let value1 = str.split("T");
     let value2 = value1[1].split(".");
-    return value1[0] + " " + value2[0];
+
+    var d1 = new Date(value1[0] + " " + value2[0]);
+    d1.setTime(d1.getTime() + 480 * 60 * 1000);
+    let _dateformat = d1.toLocaleString("en-GB");
+    let _date = _dateformat.split(", ");
+    let date = _date[0].split("/");
+    date.reverse();
+    console.log(date);
+
+    return date[0] + "-" + date[1] + "-" + date[2] + " " + _date[1];
 }
 
 try {
@@ -89,14 +96,13 @@ try {
         .then((result) => {
             let data = result[0];
             formatSQLDateTime(data["start_date"]);
-            /** @type any */ (document.getElementById(
-                "startTime"
-            )).value = formatSQLDateTime(data["start_date"]);
-            /** @type any */ (document.getElementById(
-                "endTime"
-            )).value = formatSQLDateTime(data["end_date"]);
-            /** @type any */ (document.getElementById("event")).value =
-                data["event"];
+            /** @type {any} */ (document.getElementById("startTime")).value = formatSQLDateTime(
+                data["start_date"]
+            );
+            /** @type {any} */ (document.getElementById("endTime")).value = formatSQLDateTime(
+                data["end_date"]
+            );
+            /** @type {any} */ (document.getElementById("event")).value = data["event"];
             console.log(data);
         });
 } catch (error) {
@@ -106,11 +112,9 @@ try {
 var submitButton = document.getElementById("submit");
 
 submitButton.onclick = function () {
-    let startTimeValue = /** @type any */ (document.getElementById("startTime"))
-        .value;
-    let endTimeValue = /** @type any */ (document.getElementById("endTime"))
-        .value;
-    let event = /** @type any */ (document.getElementById("event")).value;
+    let startTimeValue = /** @type {any} */ (document.getElementById("startTime")).value;
+    let endTimeValue = /** @type {any} */ (document.getElementById("endTime")).value;
+    let event = /** @type {any} */ (document.getElementById("event")).value;
 
     if (
         checkDateTime(startTimeValue) &&

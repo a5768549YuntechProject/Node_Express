@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
-    <script src="./js/static-csr.js" data-static></script>
-
-    <script src="./js/index.js" data-static></script>
     <link rel="stylesheet" href="./css/index.css" data-static>
     <link rel="stylesheet" href="./css/calendar.css">
+
+    <script src="./js/static-csr.js" data-static></script>
+    <script src="./js/index.js" data-static></script>
 </head>
 
 <body>
@@ -29,18 +29,36 @@
         <table id="tabapay_calendar" cellspacing="0" cellpadding="10" style="width:100%">
             <thead id="calendar_head">
                 <tr>
-                    <th>S</th>
-                    <th>M</th>
-                    <th>T</th>
-                    <th>W</th>
-                    <th>T</th>
-                    <th>F</th>
-                    <th>S</th>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
                 </tr>
             </thead>
             <tbody id="calendar_body">
             </tbody>
         </table>
+
+        <p></p>
+        <div class='eventTitle'>Today Event</div>
+        <table id="todayEventTable" style="width:80%">
+            <tr>
+                <th>Date</th>
+                <th>Event</th>
+            </tr>
+        </table>
+
+        <div class='eventTitle'>This Week Event</div>
+        <table id="weekEventTable" style="width:80%">
+            <tr>
+                <th>Date</th>
+                <th>Event</th>
+            </tr>
+        </table>
+
         <script src="./js/calendar.js"></script>
 </body>
 

@@ -8,9 +8,7 @@ function checkDateTime(str) {
         alert("請輸入日期");
         return false;
     }
-    var matches = str.match(
-        /^(\d{4})\-(\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/
-    );
+    var matches = str.match(/^(\d{4})\-(\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/);
     if (matches === null) {
         // invalid
         alert("請輸入正確的日期");
@@ -73,10 +71,8 @@ function checkEmtpy(str) {
 var submitButton = document.getElementById("submit");
 
 submitButton.onclick = function () {
-    let startTimeValue = /** @type any */ (document.getElementById("startTime"))
-        .value;
-    let endTimeValue = /** @type any */ (document.getElementById("endTime"))
-        .value;
+    let startTimeValue = /** @type any */ (document.getElementById("startTime")).value;
+    let endTimeValue = /** @type any */ (document.getElementById("endTime")).value;
     let event = /** @type any */ (document.getElementById("event")).value;
 
     if (

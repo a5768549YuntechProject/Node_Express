@@ -10,6 +10,7 @@ function formatSQLDateTimeAndTimeZone(str) {
     console.log("offset" + d1.getTimezoneOffset());
     d1.setTime(d1.getTime() + 480 * 60 * 1000);
     return d1.toLocaleString();
+    //return value1[0] + ' ' + value2[0]
 }
 
 /**
@@ -50,7 +51,6 @@ function renderTable(data) {
 }
 
 try {
-    // @ts-ignore
     fetch(apiUrl + "api/schedules")
         .then((res) => {
             return res.json();
@@ -66,8 +66,8 @@ try {
 
 /** 新增listener */
 document.getElementById("eventTable").addEventListener("click", (e) => {
-    let editId = /** @type any */ (e.target).getAttribute("edit-id");
-    let delId = /** @type any */ (e.target).getAttribute("del-id");
+    let editId = /** @type {any} */ (e.target).getAttribute("edit-id");
+    let delId = /** @type {any} */ (e.target).getAttribute("del-id");
     if (editId === null && delId !== null) {
         //del button
         let data = {
@@ -76,7 +76,6 @@ document.getElementById("eventTable").addEventListener("click", (e) => {
 
         if (confirm("確定要刪除嗎？")) {
             try {
-                // @ts-ignore
                 fetch(apiUrl + "api/schedules", {
                     method: "DELETE",
                     body: JSON.stringify(data),

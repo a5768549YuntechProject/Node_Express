@@ -7,7 +7,7 @@
 }
 thead {
     background: rgb(61, 103, 219);
-    color: #FFF;
+    color: #fff;
 }
 td {
     padding: 2%;
@@ -38,9 +38,14 @@ td:hover {
 }
 .placeholder {
     height: 35px;
-    background: #FFF;
+    background: #fff;
     color: #000;
 }
-span{
-    color:#000;
+span {
+    color: #000;
+}
+.eventTitle{
+    font-size: 18px;
+    padding-bottom: 5px;
+    padding-top: 15px;
 }
